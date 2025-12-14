@@ -1,0 +1,24 @@
+{
+  "name": "greet-website",
+  "version": "1.0.0",
+  "description": "Create and share beautiful digital greeting cards",
+  "main": "index.html",
+  "scripts": {
+    "dev": "vercel dev",
+    "build": "echo 'No build step required'",
+    "start": "vercel dev"
+  },
+  "keywords": [
+    "greeting",
+    "cards",
+    "birthday",
+    "anniversary"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.38.0"
+  },
+  "devDependencies": {}
+}
+

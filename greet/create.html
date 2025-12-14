@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="description" content="Create and customize beautiful digital greeting cards">
+    <title>Create Your Greeting - Greet</title>
+    <link rel="stylesheet" href="styles/create.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;700&family=Poppins:wght@400;600&family=Titan+One&family=Sriracha&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="wrapper" class="admin-page">
+        <!-- Hamburger Menu (Top Left) -->
+        <button class="hamburger-menu" id="hamburgerMenu" aria-label="Menu" onclick="window.location.href='index.html'">
+            <i class="fa-solid fa-home"></i>
+        </button>
+
+        <!-- Figma-like Toolbar (Top) -->
+        <div class="figma-toolbar">
+            <div class="toolbar-group">
+                <button class="toolbar-btn active" data-tool="select" id="toolSelect" title="Selection Tool (V)">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M3 3L17 17M3 17L17 3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                    <span class="tool-shortcut">1</span>
+                </button>
+                <button class="toolbar-btn" data-tool="rectangle" id="toolRectangle" title="Rectangle Tool (R)">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <rect x="4" y="4" width="12" height="12" stroke="currentColor" stroke-width="2" fill="none"/>
+                    </svg>
+                    <span class="tool-shortcut">2</span>
+                </button>
+                <button class="toolbar-btn" data-tool="diamond" id="toolDiamond" title="Diamond Tool (D)">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M10 4L16 10L10 16L4 10Z" stroke="currentColor" stroke-width="2" fill="none"/>
+                    </svg>
+                    <span class="tool-shortcut">3</span>
+                </button>
+                <button class="toolbar-btn" data-tool="circle" id="toolCircle" title="Circle Tool (O)">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <circle cx="10" cy="10" r="6" stroke="currentColor" stroke-width="2" fill="none"/>
+                    </svg>
+                    <span class="tool-shortcut">4</span>
+                </button>
+                <button class="toolbar-btn" data-tool="arrow" id="toolArrow" title="Arrow Tool (A)">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M4 10L14 10M14 10L10 6M14 10L10 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <span class="tool-shortcut">5</span>
+                </button>
+                <button class="toolbar-btn" data-tool="line" id="toolLine" title="Line Tool (L)">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <line x1="4" y1="10" x2="16" y2="10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                    <span class="tool-shortcut">6</span>
+                </button>
+                <button class="toolbar-btn" data-tool="pen" id="toolPen" title="Pen Tool (P)">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M14 6L4 16L2 18L4 16L14 6M14 6L16 4L18 6L16 8L14 6Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <span class="tool-shortcut">7</span>
+                </button>
+                <button class="toolbar-btn" data-tool="text" id="toolText" title="Text Tool (T)">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M6 4V16M14 4V16M6 10H14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                    <span class="tool-shortcut">8</span>
+                </button>
+                <button class="toolbar-btn" data-tool="image" id="toolImage" title="Image Tool (I)">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <rect x="4" y="6" width="12" height="8" stroke="currentColor" stroke-width="2" fill="none"/>
+                        <circle cx="8" cy="9" r="1.5" fill="currentColor"/>
+                        <path d="M4 14L7 11L10 14L16 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <span class="tool-shortcut">9</span>
+                </button>
+                <button class="toolbar-btn" data-tool="eraser" id="toolEraser" title="Eraser Tool (E)">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M6 6L14 14M6 14L14 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M4 8L8 4L16 12L12 16L4 8Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <span class="tool-shortcut">0</span>
+                </button>
+                <button class="toolbar-btn" data-tool="shapes" id="toolShapes" title="Shapes Library (S)">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <circle cx="7" cy="7" r="2" fill="currentColor"/>
+                        <rect x="11" y="5" width="4" height="4" fill="currentColor"/>
+                        <path d="M6 13L10 9L14 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="toolbar-divider"></div>
+            <div class="toolbar-group">
+                <button class="toolbar-btn" data-tool="lock" id="toolLock" title="Lock/Unlock">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <rect x="6" y="9" width="8" height="7" stroke="currentColor" stroke-width="2" fill="none"/>
+                        <path d="M6 9V6C6 4.34315 7.34315 3 9 3H11C12.6569 3 14 4.34315 14 6V9" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </button>
+                <button class="toolbar-btn" data-tool="hand" id="toolHand" title="Hand Tool (H)">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M8 8V4C8 3.44772 8.44772 3 9 3C9.55228 3 10 3.44772 10 4V8M8 8H10M8 8V12M10 8V12M10 12H12C12.5523 12 13 12.4477 13 13V15C13 15.5523 12.5523 16 12 16H6C5.44772 16 5 15.5523 5 15V11C5 10.4477 5.44772 10 6 10H8M10 12V10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="toolbar-divider"></div>
+            <div class="toolbar-group">
+                <button class="toolbar-btn toggle-btn" id="animationToggle" data-tool="toggle-animation" title="Toggle Animations">
+                    <i class="fa-solid fa-play" id="animationToggleIcon"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Main Content Container -->
+        <div class="admin-content-container">
+            <!-- Main Layout Container -->
+            <div class="admin-layout">
+                <!-- Section B: Main Preview Canvas (Left, Large) -->
+                <div class="preview-canvas-section">
+                    <div class="preview-controls">
+                        <button id="viewToggleBtn" class="view-toggle-btn" title="Toggle between Desktop and Mobile view">
+                            <i class="fa-solid fa-desktop" id="viewToggleIcon"></i>
+                            <span id="viewToggleText">Desktop (16:9)</span>
+                        </button>
+                        <button id="templateBtn" class="view-toggle-btn" title="Choose Template" style="margin-left: 10px;">
+                            <i class="fa-solid fa-palette"></i>
+                            <span>Templates</span>
+                        </button>
+                    </div>
+                    <div id="greetingPreview" class="greeting-preview aspect-ratio-desktop">
+                        <iframe id="previewIframe" src="about:blank" frameborder="0"></iframe>
+                    </div>
+                </div>
+
+                <!-- Section A: Edit Your Greeting Sidebar (Right, Collapsible) -->
+                <div class="edit-sidebar" id="editSidebar">
+                    <div class="sidebar-header">
+                        <h2 class="sidebar-title">Edit Your Greeting</h2>
+                        <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </button>
+                    </div>
+                    <div class="sidebar-content">
+                        <div class="form-group">
+                            <label for="templateSelect">Template:</label>
+                            <select id="templateSelect">
+                                <option value="birthday">Birthday Template</option>
+                                <option value="anniversary">Anniversary Template</option>
+                                <option value="congratulations">Congratulations Template</option>
+                                <option value="custom">Custom Template</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="recipientName">Recipient Name:</label>
+                            <input type="text" id="recipientName" placeholder="Enter name (e.g., Mehwish)" value="Dear Friend">
+                        </div>
+                        <div class="form-group">
+                            <label for="greetingType">Greeting Type:</label>
+                            <select id="greetingType">
+                                <option value="birthday">Happy Birthday</option>
+                                <option value="anniversary">Happy Anniversary</option>
+                                <option value="congratulations">Congratulations</option>
+                                <option value="custom">Custom</option>
+                            </select>
+                        </div>
+                        <div class="form-group" id="customGreetingGroup" style="display: none;">
+                            <label for="customGreeting">Custom Greeting:</label>
+                            <input type="text" id="customGreeting" placeholder="Enter custom greeting">
+                        </div>
+                        <div class="form-group">
+                            <label for="dateText">Date/Event:</label>
+                            <input type="text" id="dateText" placeholder="e.g., 27 May" value="">
+                        </div>
+                        <div class="form-group">
+                            <label for="imageUrl">Image URL:</label>
+                            <input type="text" id="imageUrl" placeholder="Enter image URL or upload">
+                            <input type="file" id="imageFile" accept="image/*" style="margin-top: 10px;">
+                            <small>Or upload an image file (Max 5MB)</small>
+                            <div id="imagePreview" style="margin-top: 10px; display: none;">
+                                <img id="previewImg" src="" alt="Preview" style="max-width: 100%; max-height: 150px; border-radius: 8px;">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="messageTitle">Message Title:</label>
+                            <input type="text" id="messageTitle" placeholder="e.g., To You!" value="To You!">
+                        </div>
+                        <div class="form-group">
+                            <label for="messageText">Message:</label>
+                            <textarea id="messageText" rows="6" placeholder="Enter your message here...">Happy birthday! Wishing you all the joy, happiness, and success in the world. May your special day be filled with love and laughter! 🎉🎂🎈</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="buttonText">Button Text:</label>
+                            <input type="text" id="buttonText" placeholder="e.g., Click Here" value="Click Here">
+                        </div>
+                        <button id="saveBtn" class="done-button">
+                            <i class="fa-solid fa-save"></i>
+                            Save & Get Link
+                        </button>
+                        <button id="previewBtn" class="done-button" style="margin-top: 10px; background-color: #4CAF50;">
+                            <i class="fa-solid fa-eye"></i>
+                            Preview
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Figma-like Toolbar (Top) -->
+            <div class="figma-toolbar">
+                <div class="toolbar-group">
+                    <button class="toolbar-btn" data-tool="select" id="toolSelect" title="Selection Tool (V)">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M3 3L17 17M3 17L17 3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                        <span class="tool-shortcut">1</span>
+                    </button>
+                    <button class="toolbar-btn" data-tool="rectangle" id="toolRectangle" title="Rectangle Tool (R)">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <rect x="4" y="4" width="12" height="12" stroke="currentColor" stroke-width="2" fill="none"/>
+                        </svg>
+                        <span class="tool-shortcut">2</span>
+                    </button>
+                    <button class="toolbar-btn" data-tool="diamond" id="toolDiamond" title="Diamond Tool (D)">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M10 4L16 10L10 16L4 10Z" stroke="currentColor" stroke-width="2" fill="none"/>
+                        </svg>
+                        <span class="tool-shortcut">3</span>
+                    </button>
+                    <button class="toolbar-btn" data-tool="circle" id="toolCircle" title="Circle Tool (O)">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <circle cx="10" cy="10" r="6" stroke="currentColor" stroke-width="2" fill="none"/>
+                        </svg>
+                        <span class="tool-shortcut">4</span>
+                    </button>
+                    <button class="toolbar-btn" data-tool="arrow" id="toolArrow" title="Arrow Tool (A)">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M4 10L14 10M14 10L10 6M14 10L10 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span class="tool-shortcut">5</span>
+                    </button>
+                    <button class="toolbar-btn" data-tool="line" id="toolLine" title="Line Tool (L)">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <line x1="4" y1="10" x2="16" y2="10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                        <span class="tool-shortcut">6</span>
+                    </button>
+                    <button class="toolbar-btn" data-tool="pen" id="toolPen" title="Pen Tool (P)">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M14 6L4 16L2 18L4 16L14 6M14 6L16 4L18 6L16 8L14 6Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span class="tool-shortcut">7</span>
+                    </button>
+                    <button class="toolbar-btn" data-tool="text" id="toolText" title="Text Tool (T)">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M6 4V16M14 4V16M6 10H14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                        <span class="tool-shortcut">8</span>
+                    </button>
+                    <button class="toolbar-btn" data-tool="image" id="toolImage" title="Image Tool (I)">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <rect x="4" y="6" width="12" height="8" stroke="currentColor" stroke-width="2" fill="none"/>
+                            <circle cx="8" cy="9" r="1.5" fill="currentColor"/>
+                            <path d="M4 14L7 11L10 14L16 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span class="tool-shortcut">9</span>
+                    </button>
+                    <button class="toolbar-btn" data-tool="eraser" id="toolEraser" title="Eraser Tool (E)">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M6 6L14 14M6 14L14 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            <path d="M4 8L8 4L16 12L12 16L4 8Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span class="tool-shortcut">0</span>
+                    </button>
+                    <button class="toolbar-btn" data-tool="shapes" id="toolShapes" title="Shapes Library (S)">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <circle cx="7" cy="7" r="2" fill="currentColor"/>
+                            <rect x="11" y="5" width="4" height="4" fill="currentColor"/>
+                            <path d="M6 13L10 9L14 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="toolbar-divider"></div>
+                <div class="toolbar-group">
+                    <button class="toolbar-btn" data-tool="lock" id="toolLock" title="Lock/Unlock">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <rect x="6" y="9" width="8" height="7" stroke="currentColor" stroke-width="2" fill="none"/>
+                            <path d="M6 9V6C6 4.34315 7.34315 3 9 3H11C12.6569 3 14 4.34315 14 6V9" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </button>
+                    <button class="toolbar-btn" data-tool="hand" id="toolHand" title="Hand Tool (H)">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M8 8V4C8 3.44772 8.44772 3 9 3C9.55228 3 10 3.44772 10 4V8M8 8H10M8 8V12M10 8V12M10 12H12C12.5523 12 13 12.4477 13 13V15C13 15.5523 12.5523 16 12 16H6C5.44772 16 5 15.5523 5 15V11C5 10.4477 5.44772 10 6 10H8M10 12V10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="toolbar-divider"></div>
+                <div class="toolbar-group">
+                    <button class="toolbar-btn toggle-btn" id="animationToggle" data-tool="toggle-animation" title="Toggle Animations">
+                        <i class="fa-solid fa-play" id="animationToggleIcon"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Section C: Bottom Tools Panel (Properties Panel) -->
+            <div class="tools-panel" id="propertiesPanel">
+                <div class="tools-header">
+                    <span class="tools-title">Properties</span>
+                </div>
+                <div class="tools-content" id="propertiesContent">
+                    <div class="property-group">
+                        <label>No selection</label>
+                        <p class="property-hint">Select an element to edit its properties</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Share Modal -->
+    <div id="shareModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeShareModal()">&times;</span>
+            <h2>Your Greeting is Ready!</h2>
+            <p>Share this link with your loved ones:</p>
+            <div class="share-link-container">
+                <input type="text" id="shareLink" readonly>
+                <button onclick="copyShareLink()" class="copy-btn">
+                    <i class="fa-solid fa-copy"></i> Copy
+                </button>
+            </div>
+            <div class="share-buttons">
+                <button onclick="shareOnWhatsApp()" class="share-btn whatsapp">
+                    <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                </button>
+                <button onclick="shareOnFacebook()" class="share-btn facebook">
+                    <i class="fa-brands fa-facebook"></i> Facebook
+                </button>
+                <button onclick="shareOnTwitter()" class="share-btn twitter">
+                    <i class="fa-brands fa-twitter"></i> Twitter
+                </button>
+            </div>
+            <button onclick="viewGreeting()" class="view-btn">
+                <i class="fa-solid fa-eye"></i> View Greeting
+            </button>
+        </div>
+    </div>
+
+    <script src="js/create.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="description" content="Create and customize beautiful digital greeting cards">
+    <meta name="theme-color" content="#FF7882">
+    <title>Edit Your Greeting</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;700&family=Poppins:wght@400;600&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div id="wrapper" class="admin-page">
+        <!-- Hamburger Menu (Top Left) -->
+        <button class="hamburger-menu" id="hamburgerMenu" aria-label="Menu">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+
+        <!-- Main Content Container with Horizontal Margins -->
+        <div class="admin-content-container">
+            <!-- Main Layout Container -->
+            <div class="admin-layout">
+            <!-- Section B: Main Preview Canvas (Left, Large) -->
+            <div class="preview-canvas-section">
+                <div class="preview-controls">
+                    <button id="viewToggleBtn" class="view-toggle-btn" title="Toggle between Desktop and Mobile view">
+                        <i class="fa-solid fa-desktop" id="viewToggleIcon"></i>
+                        <span id="viewToggleText">Desktop (16:9)</span>
+                    </button>
+                </div>
+                <div id="greetingPreview" class="greeting-preview aspect-ratio-desktop">
+                    <iframe id="previewIframe" src="about:blank" frameborder="0"></iframe>
+                </div>
+            </div>
+
+            <!-- Section A: Edit Your Greeting Sidebar (Right, Collapsible) -->
+            <div class="edit-sidebar" id="editSidebar">
+                <div class="sidebar-header">
+                    <h2 class="sidebar-title">Edit Your Greeting</h2>
+                    <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </button>
+                </div>
+                <div class="sidebar-content">
+                    <div class="form-group">
+                        <label for="recipientName">Recipient Name:</label>
+                        <input type="text" id="recipientName" placeholder="Enter name (e.g., Mehwish)" value="Dear Mehwish">
+                    </div>
+                    <div class="form-group">
+                        <label for="greetingType">Greeting Type:</label>
+                        <select id="greetingType">
+                            <option value="birthday">Happy Birthday</option>
+                            <option value="anniversary">Happy Anniversary</option>
+                            <option value="congratulations">Congratulations</option>
+                            <option value="custom">Custom</option>
+                        </select>
+                    </div>
+                    <div class="form-group" id="customGreetingGroup" style="display: none;">
+                        <label for="customGreeting">Custom Greeting:</label>
+                        <input type="text" id="customGreeting" placeholder="Enter custom greeting">
+                    </div>
+                    <div class="form-group">
+                        <label for="dateText">Date/Event:</label>
+                        <input type="text" id="dateText" placeholder="e.g., 27 May" value="27 May">
+                    </div>
+                    <div class="form-group">
+                        <label for="imageUrl">Image URL:</label>
+                        <input type="text" id="imageUrl" placeholder="Enter image URL or use default">
+                        <input type="file" id="imageFile" accept="image/*" style="margin-top: 10px;">
+                        <small>Or upload an image file</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="messageTitle">Message Title:</label>
+                        <input type="text" id="messageTitle" placeholder="e.g., To You!" value="To You!">
+                    </div>
+                    <div class="form-group">
+                        <label for="messageText">Message:</label>
+                        <textarea id="messageText" rows="6" placeholder="Enter your message here...">Happy birthday 🥳🎂🥳 chanda the day you come into my life I was not really much attached to you but day by day you became close to my heart . And now you are truly my younger sister. I wish I could remove some of the pain from your life which you are bearing alone. But you're always welcome 🤗 you can talk anytime you want to talk specially those which you can't say to others. And this year your all dreams come true . I wish that your brother could wish you but if couldn't wish on him behalf I am wishing you happy birthday 🎈🎂🎈 sana . Don't be Sad ok be happy 😌</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="buttonText">Button Text:</label>
+                        <input type="text" id="buttonText" placeholder="e.g., Click Here Mehwish" value="Click Here">
+                    </div>
+                    <button id="doneBtn" class="done-button">
+                        <i class="fa-solid fa-check"></i>
+                        Done
+                    </button>
+                </div>
+            </div>
+            </div>
+
+            <!-- Section C: Bottom Tools Panel (Always Visible) -->
+            <div class="tools-panel">
+                <div class="tools-header">
+                    <span class="tools-title">Tools</span>
+                </div>
+                <div class="tools-content">
+                    <div class="tool-category">
+                        <button class="tool-btn" data-tool="characters" title="Add Characters">
+                            <i class="fa-solid fa-smile"></i>
+                            <span>Characters</span>
+                        </button>
+                    </div>
+                    <div class="tool-category">
+                        <button class="tool-btn" data-tool="shapes" title="Add Shapes">
+                            <i class="fa-solid fa-shapes"></i>
+                            <span>Shapes</span>
+                        </button>
+                    </div>
+                    <div class="tool-category">
+                        <button class="tool-btn" data-tool="text" title="Add Text">
+                            <i class="fa-solid fa-font"></i>
+                            <span>Text</span>
+                        </button>
+                    </div>
+                    <div class="tool-category">
+                        <button class="tool-btn" data-tool="button" title="Add Button">
+                            <i class="fa-solid fa-square"></i>
+                            <span>Button</span>
+                        </button>
+                    </div>
+                    <div class="tool-category">
+                        <button class="tool-btn" data-tool="animation" title="Add Animation">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i>
+                            <span>Animation</span>
+                        </button>
+                    </div>
+                    <div class="tool-category">
+                        <button class="tool-btn toggle-btn" id="animationToggle" data-tool="toggle-animation" title="Toggle Animations">
+                            <i class="fa-solid fa-play" id="animationToggleIcon"></i>
+                            <span id="animationToggleText">Animations On</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Sidebar Toggle Functionality with null checks
+        const sidebar = document.getElementById('editSidebar');
+        const sidebarToggle = document.getElementById('sidebarToggle');
+        
+        if (sidebar && sidebarToggle) {
+            const sidebarIcon = sidebarToggle.querySelector('i');
+            if (sidebarIcon) {
+                sidebarToggle.addEventListener('click', function() {
+                    sidebar.classList.toggle('collapsed');
+                    if (sidebar.classList.contains('collapsed')) {
+                        sidebarIcon.classList.remove('fa-chevron-right');
+                        sidebarIcon.classList.add('fa-chevron-left');
+                    } else {
+                        sidebarIcon.classList.remove('fa-chevron-left');
+                        sidebarIcon.classList.add('fa-chevron-right');
+                    }
+                });
+            }
+        }
+
+        // Hamburger Menu (for future menu functionality)
+        const hamburgerMenu = document.getElementById('hamburgerMenu');
+        if (hamburgerMenu) {
+            hamburgerMenu.addEventListener('click', function() {
+                // Placeholder for menu functionality
+                console.log('Menu clicked');
+            });
+        }
+
+        // Handle custom greeting option
+        const greetingTypeEl = document.getElementById('greetingType');
+        if (greetingTypeEl) {
+            greetingTypeEl.addEventListener('change', function() {
+                const customGroup = document.getElementById('customGreetingGroup');
+                if (customGroup) {
+                    if (this.value === 'custom') {
+                        customGroup.style.display = 'block';
+                    } else {
+                        customGroup.style.display = 'none';
+                    }
+                }
+                updatePreview();
+            });
+        }
+
+        // Handle image file upload with validation
+        const imageFileEl = document.getElementById('imageFile');
+        if (imageFileEl) {
+            imageFileEl.addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    // Validate file type
+                    if (!file.type.startsWith('image/')) {
+                        alert('Please select an image file');
+                        this.value = ''; // Clear the input
+                        return;
+                    }
+                    
+                    // Validate file size (max 5MB)
+                    const maxSize = 5 * 1024 * 1024; // 5MB
+                    if (file.size > maxSize) {
+                        alert('Image file is too large. Please select an image smaller than 5MB');
+                        this.value = ''; // Clear the input
+                        return;
+                    }
+                    
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        const imageUrlEl = document.getElementById('imageUrl');
+                        if (imageUrlEl) {
+                            imageUrlEl.value = e.target.result;
+                            updatePreview();
+                        }
+                    };
+                    reader.onerror = function() {
+                        alert('Error reading image file. Please try again.');
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+        }
+
+        // Animation toggle state
+        let animationsEnabled = true;
+        
+        // View mode toggle (Desktop 16:9 or Mobile 19.5:9) with null checks
+        let isMobileView = false;
+        const viewToggleBtn = document.getElementById('viewToggleBtn');
+        const viewToggleIcon = document.getElementById('viewToggleIcon');
+        const viewToggleText = document.getElementById('viewToggleText');
+        const greetingPreview = document.getElementById('greetingPreview');
+        
+        if (viewToggleBtn && viewToggleIcon && viewToggleText && greetingPreview) {
+            viewToggleBtn.addEventListener('click', function() {
+                isMobileView = !isMobileView;
+                if (isMobileView) {
+                    greetingPreview.classList.remove('aspect-ratio-desktop');
+                    greetingPreview.classList.add('aspect-ratio-mobile');
+                    viewToggleIcon.classList.remove('fa-desktop');
+                    viewToggleIcon.classList.add('fa-mobile-screen-button');
+                    viewToggleText.textContent = 'Mobile (19.5:9)';
+                } else {
+                    greetingPreview.classList.remove('aspect-ratio-mobile');
+                    greetingPreview.classList.add('aspect-ratio-desktop');
+                    viewToggleIcon.classList.remove('fa-mobile-screen-button');
+                    viewToggleIcon.classList.add('fa-desktop');
+                    viewToggleText.textContent = 'Desktop (16:9)';
+                }
+                // Wait for layout to update, then scale iframe content
+                setTimeout(function() {
+                    scaleIframeContent();
+                }, 100);
+            });
+        }
+        
+        // Function to scale iframe content for accurate positioning
+        function scaleIframeContent() {
+            const iframe = document.getElementById('previewIframe');
+            const previewContainer = document.getElementById('greetingPreview');
+            
+            if (!iframe || !previewContainer) {
+                console.warn('Iframe or preview container not found');
+                return;
+            }
+            
+            try {
+                const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+                
+                if (!iframeDoc) {
+                    // Cross-origin or not loaded yet - this is expected for file:// protocol
+                    if (window.location.protocol === 'http:' || window.location.protocol === 'https:') {
+                        console.warn('Could not access iframe content (cross-origin or not loaded)');
+                    }
+                    return;
+                }
+                
+                const wrapper = iframeDoc.getElementById('wrapper');
+                
+                if (!wrapper) {
+                    console.warn('Wrapper element not found in iframe');
+                    return;
+                }
+                
+                // Get container dimensions
+                const containerWidth = previewContainer.offsetWidth;
+                const containerHeight = previewContainer.offsetHeight;
+                
+                if (containerWidth === 0 || containerHeight === 0) {
+                    console.warn('Container has zero dimensions, skipping scale');
+                    return;
+                }
+                
+                // Set fixed viewport dimensions based on view mode
+                // These should match the natural design dimensions
+                let baseWidth, baseHeight;
+                if (isMobileView) {
+                    baseWidth = 600;
+                    baseHeight = 1100; // Taller for mobile portrait-like view
+                } else {
+                    baseWidth = 1200;
+                    baseHeight = 800; // Natural height for desktop greeting card
+                }
+                
+                // Set iframe document dimensions
+                if (iframeDoc.documentElement) {
+                    iframeDoc.documentElement.style.width = baseWidth + 'px';
+                    iframeDoc.documentElement.style.height = baseHeight + 'px';
+                    iframeDoc.documentElement.style.margin = '0';
+                    iframeDoc.documentElement.style.padding = '0';
+                    iframeDoc.documentElement.style.overflow = 'hidden';
+                }
+                
+                // Set body dimensions
+                if (iframeDoc.body) {
+                    iframeDoc.body.style.width = baseWidth + 'px';
+                    iframeDoc.body.style.height = baseHeight + 'px';
+                    iframeDoc.body.style.margin = '0';
+                    iframeDoc.body.style.padding = '0';
+                    iframeDoc.body.style.overflow = 'hidden';
+                    iframeDoc.body.style.position = 'relative';
+                }
+                
+                // Set wrapper to fill the iframe viewport
+                wrapper.style.width = '100%';
+                wrapper.style.height = '100%';
+                wrapper.style.position = 'relative';
+                wrapper.style.margin = '0';
+                
+                // Wait for layout to settle, then scale
+                setTimeout(function() {
+                    // Account for safe zone padding in container dimensions
+                    const safeZonePadding = 16; // Approximate safe zone (spacing-xs * 2)
+                    const availableWidth = Math.max(containerWidth - safeZonePadding, baseWidth);
+                    const availableHeight = Math.max(containerHeight - safeZonePadding, baseHeight);
+                    
+                    // Calculate scale to fit container while maintaining aspect ratio
+                    // Use slightly smaller scale to ensure nothing touches edges
+                    const scaleX = (availableWidth * 0.95) / baseWidth; // 95% to add extra safety
+                    const scaleY = (availableHeight * 0.95) / baseHeight; // 95% to add extra safety
+                    const scale = Math.min(scaleX, scaleY);
+                    
+                    // Ensure scale is valid
+                    if (isNaN(scale) || scale <= 0) {
+                        console.warn('Invalid scale calculated:', scale);
+                        return;
+                    }
+                    
+                    // Apply scale transform to the iframe itself
+                    iframe.style.transform = `scale(${scale})`;
+                    iframe.style.transformOrigin = 'top center';
+                    iframe.style.width = baseWidth + 'px';
+                    iframe.style.height = baseHeight + 'px';
+                    
+                    // Adjust preview container to center the scaled iframe
+                    previewContainer.style.display = 'flex';
+                    previewContainer.style.justifyContent = 'center';
+                    previewContainer.style.alignItems = 'flex-start';
+                }, 150);
+            } catch (e) {
+                // Cross-origin or local file access error - this is expected when using file:// protocol
+                // Silently handle - the iframe will still display, just without custom scaling
+                // Only log in development mode (not in production)
+                if (window.location.protocol === 'http:' || window.location.protocol === 'https:') {
+                    // Only log if running on http/https, not file://
+                    console.warn('Could not access iframe content (this is normal for local files):', e.name);
+                }
+                // For file:// protocol, the iframe will render normally without scaling
+                // This is expected behavior due to browser security restrictions
+            }
+        }
+
+        // Helper function to sanitize input
+        function sanitizeInput(input) {
+            if (typeof input !== 'string') return '';
+            // Remove potentially dangerous characters but allow emojis and normal text
+            return input.trim();
+        }
+
+        // Helper function to safely store in localStorage
+        function safeLocalStorageSet(key, value) {
+            try {
+                if (typeof(Storage) !== "undefined") {
+                    localStorage.setItem(key, value);
+                    return true;
+                } else {
+                    console.warn('localStorage is not available');
+                    return false;
+                }
+            } catch (e) {
+                if (e.name === 'QuotaExceededError') {
+                    console.error('localStorage quota exceeded. Clearing old preview data...');
+                    // Clear old preview entries
+                    try {
+                        const keys = Object.keys(localStorage);
+                        keys.forEach(key => {
+                            if (key.startsWith('preview_')) {
+                                localStorage.removeItem(key);
+                            }
+                        });
+                        // Try again
+                        localStorage.setItem(key, value);
+                        return true;
+                    } catch (e2) {
+                        console.error('Failed to clear localStorage:', e2);
+                        return false;
+                    }
+                } else {
+                    console.error('Error storing in localStorage:', e);
+                    return false;
+                }
+            }
+        }
+
+        // Update preview function - Using iframe to load greeting.html directly
+        function updatePreview() {
+            const iframe = document.getElementById('previewIframe');
+            if (!iframe) {
+                console.error('Preview iframe not found');
+                return;
+            }
+
+            const recipientNameEl = document.getElementById('recipientName');
+            const greetingTypeEl = document.getElementById('greetingType');
+            const customGreetingEl = document.getElementById('customGreeting');
+            const dateTextEl = document.getElementById('dateText');
+            const imageUrlEl = document.getElementById('imageUrl');
+            const messageTitleEl = document.getElementById('messageTitle');
+            const messageTextEl = document.getElementById('messageText');
+            const buttonTextEl = document.getElementById('buttonText');
+
+            // Get values with null checks
+            const recipientName = sanitizeInput(recipientNameEl ? recipientNameEl.value : '') || 'Dear Friend';
+            const greetingType = greetingTypeEl ? greetingTypeEl.value : 'birthday';
+            const customGreeting = sanitizeInput(customGreetingEl ? customGreetingEl.value : '');
+            const dateText = sanitizeInput(dateTextEl ? dateTextEl.value : '');
+            const imageUrl = sanitizeInput(imageUrlEl ? imageUrlEl.value : '') || './images/unnamed.png';
+            const messageTitle = sanitizeInput(messageTitleEl ? messageTitleEl.value : '') || 'To You!';
+            const messageText = sanitizeInput(messageTextEl ? messageTextEl.value : '');
+            const buttonText = sanitizeInput(buttonTextEl ? buttonTextEl.value : '') || 'Click Here';
+
+            // Prepare greeting data
+            const greetingData = {
+                recipientName: recipientName,
+                greetingType: greetingType,
+                customGreeting: customGreeting,
+                dateText: dateText,
+                imageUrl: imageUrl,
+                messageTitle: messageTitle,
+                messageText: messageText,
+                buttonText: buttonText
+            };
+
+            // Generate unique ID for preview
+            const previewId = 'preview_' + Date.now();
+            
+            // Store in localStorage with error handling
+            const stored = safeLocalStorageSet(previewId, JSON.stringify(greetingData));
+            if (!stored) {
+                console.warn('Could not store preview data, but continuing...');
+            }
+            
+            // Load greeting.html in iframe with preview data
+            const iframeSrc = `greeting.html?id=${previewId}&preview=true&animations=${animationsEnabled}`;
+            
+            // Set iframe dimensions before loading to ensure proper rendering
+            if (isMobileView) {
+                iframe.style.width = '600px';
+                iframe.style.height = '1100px';
+            } else {
+                iframe.style.width = '1200px';
+                iframe.style.height = '800px';
+            }
+            
+            iframe.src = iframeSrc;
+            
+            // After iframe loads, scale content for accurate positioning
+            iframe.onload = function() {
+                setTimeout(scaleIframeContent, 100);
+            };
+            
+            // Handle iframe load errors
+            iframe.onerror = function() {
+                console.error('Error loading iframe content');
+            };
+        }
+
+        // Update preview on input changes with null checks
+        ['recipientName', 'greetingType', 'customGreeting', 'dateText', 'imageUrl', 'messageTitle', 'messageText', 'buttonText'].forEach(id => {
+            const element = document.getElementById(id);
+            if (element) {
+                element.addEventListener('input', updatePreview);
+            }
+        });
+
+        // Animation toggle functionality with null checks
+        const animationToggle = document.getElementById('animationToggle');
+        const animationToggleIcon = document.getElementById('animationToggleIcon');
+        const animationToggleText = document.getElementById('animationToggleText');
+
+        if (animationToggle && animationToggleIcon && animationToggleText) {
+            animationToggle.addEventListener('click', function() {
+                animationsEnabled = !animationsEnabled;
+                if (animationsEnabled) {
+                    animationToggleIcon.classList.remove('fa-pause');
+                    animationToggleIcon.classList.add('fa-play');
+                    animationToggleText.textContent = 'Animations On';
+                    this.classList.remove('animations-off');
+                } else {
+                    animationToggleIcon.classList.remove('fa-play');
+                    animationToggleIcon.classList.add('fa-pause');
+                    animationToggleText.textContent = 'Animations Off';
+                    this.classList.add('animations-off');
+                }
+                // Reload iframe with new animation setting
+                updatePreview();
+            });
+        }
+
+        // Tool buttons (placeholder for future functionality)
+        document.querySelectorAll('.tool-btn:not(.toggle-btn)').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const tool = this.getAttribute('data-tool');
+                console.log(`Tool selected: ${tool}`);
+                // Future: Open tool panel or modal
+            });
+        });
+
+        // Initial preview
+        updatePreview();
+        
+        // Handle window resize to rescale iframe content
+        let resizeTimeout;
+        window.addEventListener('resize', function() {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(function() {
+                scaleIframeContent();
+            }, 250);
+        });
+        
+        // Handle orientation change on mobile devices
+        window.addEventListener('orientationchange', function() {
+            setTimeout(function() {
+                scaleIframeContent();
+            }, 500);
+        });
+        
+        // Prevent zoom on double tap (mobile)
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', function(event) {
+            const now = Date.now();
+            if (now - lastTouchEnd <= 300) {
+                event.preventDefault();
+            }
+            lastTouchEnd = now;
+        }, false);
+        
+        // Improve touch scrolling
+        if ('ontouchstart' in window) {
+            document.body.style.touchAction = 'pan-y';
+        }
+
+        // Handle Done button with validation and error handling
+        const doneBtn = document.getElementById('doneBtn');
+        if (doneBtn) {
+            doneBtn.addEventListener('click', function() {
+                const recipientNameEl = document.getElementById('recipientName');
+                const greetingTypeEl = document.getElementById('greetingType');
+                const customGreetingEl = document.getElementById('customGreeting');
+                const dateTextEl = document.getElementById('dateText');
+                const imageUrlEl = document.getElementById('imageUrl');
+                const messageTitleEl = document.getElementById('messageTitle');
+                const messageTextEl = document.getElementById('messageText');
+                const buttonTextEl = document.getElementById('buttonText');
+
+                // Get and sanitize values
+                const recipientName = sanitizeInput(recipientNameEl ? recipientNameEl.value : '') || 'Dear Friend';
+                const greetingType = greetingTypeEl ? greetingTypeEl.value : 'birthday';
+                const customGreeting = sanitizeInput(customGreetingEl ? customGreetingEl.value : '');
+                const dateText = sanitizeInput(dateTextEl ? dateTextEl.value : '');
+                const imageUrl = sanitizeInput(imageUrlEl ? imageUrlEl.value : '') || './images/unnamed.png';
+                const messageTitle = sanitizeInput(messageTitleEl ? messageTitleEl.value : '') || 'To You!';
+                const messageText = sanitizeInput(messageTextEl ? messageTextEl.value : '');
+                const buttonText = sanitizeInput(buttonTextEl ? buttonTextEl.value : '') || 'Click Here';
+
+                // Validate required fields
+                if (!recipientName || recipientName.trim() === '') {
+                    alert('Please enter a recipient name');
+                    if (recipientNameEl) recipientNameEl.focus();
+                    return;
+                }
+
+                if (greetingType === 'custom' && !customGreeting.trim()) {
+                    alert('Please enter a custom greeting');
+                    if (customGreetingEl) customGreetingEl.focus();
+                    return;
+                }
+
+                const greetingData = {
+                    recipientName: recipientName,
+                    greetingType: greetingType,
+                    customGreeting: customGreeting,
+                    dateText: dateText,
+                    imageUrl: imageUrl,
+                    messageTitle: messageTitle,
+                    messageText: messageText,
+                    buttonText: buttonText
+                };
+
+                // Generate unique ID for this greeting
+                const greetingId = 'greeting_' + Date.now();
+                
+                // Store in localStorage with error handling
+                const stored = safeLocalStorageSet(greetingId, JSON.stringify(greetingData));
+                if (!stored) {
+                    alert('Warning: Could not save greeting data. Please try again or check your browser settings.');
+                    return;
+                }
+                
+                // Redirect to greeting page with ID
+                try {
+                    window.location.href = `greeting.html?id=${greetingId}`;
+                } catch (e) {
+                    console.error('Error redirecting:', e);
+                    alert('Error redirecting to greeting page. Please try again.');
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>
+
